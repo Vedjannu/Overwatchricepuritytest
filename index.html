@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Overwatch Rice Purity Test</title>
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            margin: 0;
+            padding: 20px; /* Padding to give some space around the content */
+            background-color: #f5deb3; /* Parchment-like color */
+            color: black; /* Black text color */
+            font-size: 12px; /* Smaller font size */
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px; /* Smaller font size for heading */
+        }
+        p {
+            text-align: center;
+            font-size: 16px; /* Slightly larger font size for the blurb */
+            margin-bottom: 20px; /* Space below the blurb */
+        }
+        ol {
+            padding-left: 20px; /* Indent for the list */
+        }
+        .question {
+            margin: 2px 0; /* Smaller margin */
+        }
+        button {
+            display: block;
+            width: 80px; /* Smaller width for square shape */
+            height: 40px; /* Set height to make it square */
+            background: grey; /* Grey background */
+            color: white; /* White text color */
+            border: 1px solid #ccc; /* Light grey border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer;
+            font-size: 16px; /* Smaller font size */
+            margin: 20px auto; /* Center the button horizontally */
+            text-align: center;
+        }
+        button:hover {
+            background: #666; /* Darker grey on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>The Overwatch Rice Purity Test</h1>
+    <p>The Overwatch Rice Purity Test is an opportunity to bond over shared (and not-so-shared) degeneracy.
+       Your score determines how far gone you are, and what Overwatch Icon you are most similar too. 
+       If you did it, admit it!</p>
+    <ol id="questions-list">
+        <!-- Questions will be inserted here -->
+    </ol>
+    <button onclick="calculateScore()">Submit</button>
+    <script>
+        const questions = [
+            "Have you played Overwatch 1?",
+            "Have you played Overwatch for longer than 3 years?",
+            "Have you played GOATS in Competitive?",
+            "Have you played Double Shield in Competitive?",
+            "Do you own a gold gun?",
+            "Do you own 10 gold guns?",
+            "Do you have a Jade gun?",
+            "Do you own Pink Mercy?",
+            "Do you own Raynhardt Reinhardt?",
+            "Have you hit Diamond in Overwatch?",
+            "Have you hit Grandmaster in Overwatch?",
+            "Have you hit Champion/Top 500 in Overwatch?",
+            "Have you ever been stuck in a rank for more than 6 months?",
+            "Have you ever been stuck in a rank for more than a year?",
+            "Check this box if that rank was Gold or Plat",
+            "Have you spent over $100 on Overwatch?",
+            "Have you spent over $500 on Overwatch?",
+            "Have you ever played Overwatch every single day for a week?",
+            "Have you ever played Overwatch every single day for a month?",
+            "Have you ever played Overwatch for more than 6 hours straight?",
+            "Have you ever rage-quit a game?",
+            "Have you ever screamed at your monitor while playing Overwatch?",
+            "Have you ever sent a toxic message to a teammate?",
+            "Have you ever yelled at a teammate in voice chat?",
+            "Have you ever been muted by your teammates?",
+            "Have you ever been chat-banned?",
+            "Have you ever lost a friendship because of Overwatch?",
+            "Have you met someone on Overwatch who you would consider a legitimate threat to society?",
+            "Have you ever broken something out of rage while playing Overwatch?",
+            "Have you ever publicly shamed someone for their gameplay?",
+            "Have you ever cyberbullied someone in Overwatch?",
+            "Have you ever sent a death threat to someone over a game?",
+            "Have you ever received a death threat over a game?",
+            "Have you ever neglected personal hygiene to play Overwatch?",
+            "Have you ever skipped school or work to play Overwatch?",
+            "Have you ever missed a major life event (wedding, funeral, etc.) to play Overwatch?",
+            "Have you ever played while drunk?",
+            "Have you ever played while high?",
+            "Have you ever played while on a drug harder than marijuana?",
+            "Have you ever let Overwatch negatively affect your mental or physical health?",
+            "Do you play Overwatch to relieve stress only to get more stressed?",
+            "Have you ever got into physical conflict because of Overwatch?",
+            "Have you ever flirted with someone in-game?",
+            "Have you ever had a sexual fantasy about an Overwatch character?",
+            "Have you ever role-played as an Overwatch character in a sexual context?",
+            "Have you ever created/seen inappropriate fan art?",
+            "Have you ever got on Reddit for the sole purpose of viewing such fan art?",
+            "Have you ever got on Twitter for the sole purpose of viewing such fan art?",
+            "Have you ever…you know…to an Overwatch character?",
+            "Have you ever…you know… to an Overwatch streamer?",
+            "Have you ever…you know… to an Overwatch Character more than 10 times?",
+            "Check this box if it was Widowmaker, Mercy, or D.Va",
+            "Have you ever been caught… you know… to an Overwatch Character?",
+            "Do you know who Jeff Kaplan is?",
+            "Have you ever played Overwatch naked?",
+            "Have you ever deleted another game to make space for Overwatch?",
+            "Have you ever sent nudes to someone you met in Overwatch?",
+            "Have you ever received nudes from someone you met in Overwatch?",
+            "Have you ever cosplayed as an Overwatch character?",
+            "Have you ever hard-pocketed another player in a sensual context?",
+            "Have you ever had a matching name with another player?",
+            "Have you ever thrown a game on purpose?",
+            "Have you ever smurfed (used a lower-ranked account)?",
+            "Have you ever lost intentionally for a reward?",
+            "Have you ever used cheats or exploits to win a game?",
+            "Have you ever hacked in Overwatch?",
+            "Have you ever created or distributed hacks for Overwatch?",
+            "Have you ever collaborated with others to rig matches?",
+            "Have you ever boosted someone’s account?",
+            "Have you ever had your account boosted?",
+            "Have you ever sold an account or in-game items?",
+            "Have you ever bought an account?",
+            "Have you ever faked your gender in Overwatch?",
+            "Have you ever faked being a different age in Overwatch?",
+            "Have you ever lied about your Overwatch achievements?",
+            "Have you ever faked being a high-ranked player?",
+            "Have you ever created a fake Overwatch account to spy on someone?",
+            "Have you ever stream-sniped an Overwatch streamer?",
+            "Have you ever targeted a specific player repeatedly?",
+            "Are you a Sombra, Junkrat, Mauga, Moira, Mei, or Symmetra main?",
+            "Have you locked any of the above characters for the sole purpose of angering the enemy team?",
+            "Have you ever t-bagged an enemy player solely because they played one of those heroes?",
+            "Do you shamelessly take part in counter-picking?",
+            "Have you ever spawn-camped a player?",
+            "Have you ever spawn-camped a whole team?",
+            "Have you ever spawn-camped/griefed a player solely because of the character they chose?",
+            "Have you ever met a player with the same gamertag as you?",
+            "Have you ever manipulated or lied to a moderator/admin/developer to get someone banned?",
+            "Have you ever been banned from an Overwatch forum or community?",
+            "Have you ever been involved in a scandal in the Overwatch community?",
+            "Have you ever edited screenshots to inflate your performance?",
+            "Have you ever hacked into someone’s account?",
+            "Have you ever hacked into Blizzard’s servers?",
+            "Have you ever bet on an Overwatch game?",
+            "Have you ever been suspended from Overwatch?",
+            "Have you ever been banned from Overwatch?",
+            "Have you ever played Overwatch with someone famous?",
+            "Have you ever harassed a streamer while they were live?",
+            "Have you ever disrespected the Rein 1v1?",
+            "Is your favorite player Supertf?"
+        ];
+
+        const questionsList = document.getElementById('questions-list');
+
+        questions.forEach(question => {
+            const listItem = document.createElement('li');
+            listItem.classList.add('question');
+            listItem.innerHTML = `
+                <label>
+                    <input type="checkbox"> ${question}
+                </label>
+            `;
+            questionsList.appendChild(listItem);
+        });
+
+        function calculateScore() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            let score = 0;
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    score += 1;
+                }
+            });
+            window.location.href = `results.html?score=${score}`;
+        }
+    </script>
+</body>
+</html>
